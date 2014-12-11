@@ -38,7 +38,7 @@ else
 endif
 
 if has("syntax")
-    let g:hassyntax=1                                   "支持语法高亮
+    let g:hassyntax=2                                   "支持语法高亮
 else
     let g:hassyntax=0
 endif
@@ -49,11 +49,17 @@ endif
 let mapleader = "-"					                    "map前缀,用于替换后续<Leader>
 nnoremap <silent> <Leader>ev :vsplit $MYVIMRC<cr>	    "快速编辑配置文件
 nnoremap <silent> <Leader>sv :source $MYVIMRC<cr>	    "快速生效配置文件
-
-set shortmess=atI 					                    "禁止欢迎界面
 set nocompatible                                      	"禁用 VI 兼容模式
-filetype off                                          	"禁用文件类型侦测
+
+" 界面设置 
+set shortmess=atI 					                    "禁止欢迎界面
+set ch=2                                                "命令行高度
 colorscheme evening               			            "配色方案
+if g:haswin && g:hasgui
+    source $VIMRUNTIME/delmenu.vim                      "解决菜单乱码
+    source $VIMRUNTIME/menu.vim
+    language messages zh_CN.utf-8                       "解决consle输出乱码
+endif
 
 " 编码设置
 set encoding=utf-8                                    	"设置gvim内部编码
@@ -66,6 +72,7 @@ if has("gui_running")                                   "gui_running图形界面
 endif
 
 " 文本设置
+filetype off                                          	"禁用文件类型侦测
 set number                                            	"显示行号
 set smartindent                                       	"启用智能对齐方式
 set expandtab                                         	"将Tab键转换为空格
@@ -74,7 +81,11 @@ set shiftwidth=4                                      	"换行时自动缩进4�
 set smarttab                                          	"指定按一次backspace就删除shiftwidth宽度的空格
 set backspace=2                                         "设置退格键可用
 if g:hassyntax
-    let syntax=1
+    syntax on
+endif
+if g:haswin                                             
+    source $VIMRUNTIME\mswin.vim                        "支持windows ctrl+c/v/x
+    behave mswin
 endif
 
 " 实时搜索及高亮
@@ -91,5 +102,5 @@ set mouse=a                                             "启用鼠标
 set laststatus=2                                      	"启用状态栏信息
 
 " 键盘调整
-inoremap <Esc> <nop>
-inoremap jk <Esc> 
+inoremap <Esc> <nop>                                    "调整<Esc>
+inoremap jk <Esc>
