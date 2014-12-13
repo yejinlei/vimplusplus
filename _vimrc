@@ -42,6 +42,12 @@ if has("syntax")
 else
     let g:hassyntax=0
 endif
+
+if has("multi_byte")                                    "支持多字节编码，比如中文
+    let g:hasmulti_byte=1
+else
+    let g:hasmulti_byte=0
+endif
 "-----------------------------------------------------------"
 "                       基本配置                            "
 "-----------------------------------------------------------"
@@ -58,13 +64,32 @@ colorscheme evening                                     "配色方案
 if g:haswin && g:hasgui
     source $VIMRUNTIME\delmenu.vim                      "解决菜单乱码
     source $VIMRUNTIME\menu.vim
-    language messages zh_CN.utf-8                       "解决consle输出乱码
+    language messages zh_CN.chinese                     "解决consle输出乱码
 endif
+if g:hasgui
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=r
+    set guioptions-=L
+    map <silent> <c-F11> :if &guioptions =~# 'm' <Bar>
+        \set guioptions-=m <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=r <Bar>
+        \set guioptions-=L <Bar>
+    \else <Bar>
+        \set guioptions+=m <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=r <Bar>
+        \set guioptions+=L <Bar>
+    \endif<CR>
+endi
 
 " 编码设置
-set encoding=utf-8                                      "设置gvim内部编码
-set fileencoding=utf-8                                  "设置当前文件编码
-set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1       "设置支持打开的文件的编码
+if g:hasmulti_byte
+    set encoding=chinese                                    "设置gvim内部编码
+    set fileencoding=utf-8                                  "设置当前文件编码
+    set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1,chinese  "设置支持打开的文件的编码
+endif
 set fileformat=unix                                     "设置新文件的<EOL>格式
 set fileformats=unix,dos,mac                            "给出文件的<EOL>格式类型
 if has("gui_running")                                   "gui_running图形界面
@@ -73,6 +98,7 @@ endif
 
 " 文本设置
 filetype off                                            "禁用文件类型侦测
+set autoread                                            "当文件在外部被修改，自动更新该文件
 set number                                              "显示行号
 set smartindent                                         "启用智能对齐方式
 set expandtab                                           "将Tab键转换为空格
@@ -105,7 +131,7 @@ set laststatus=2                                        "启用状态栏信息
 
 " 键盘调整
 imap jk <Esc>                                           "插入模式下,jk取代<Esc>键，原键失效
-imap <c-k> <Up>                                         "插入模式下,ctrl+k/j/h/l取代光标键，原键失效
+imap <c-k> <Up>
 imap <c-j> <Down>
 imap <c-h> <Left>
 imap <c-l> <Right>
