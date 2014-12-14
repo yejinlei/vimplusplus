@@ -83,23 +83,22 @@ if g:hasgui
         \set guioptions+=L <Bar>
     \endif<CR>
 endif
-
-winpos 150 100                                           "指定窗口出现的位置，坐标原点在屏幕左上角
-set lines=38 columns=120                                "指定窗口大小，lines为高度，columns为宽度
+winpos 150 100                                           "指定窗口出现的位置
+set lines=38 columns=120                                 "指定窗口大小
 let g:hasmaxwin=0
 function! ChangeWin()
    if  g:hasmaxwin == 0
-      set updatetime=1000
-      au CursorHold * simalt ~x
+      set updatetime=100
+      au CursorHold * simalt ~x                          "全屏显示
       set updatetime=4000
    else
       au! CursorHold *
-      winpos 150 100                                           "指定窗口出现的位置，坐标原点在屏幕左上角
-      set lines=38 columns=120                                "指定窗口大小，lines为高度，columns为宽
+      winpos 150 100 
+      set lines=38 columns=120
    endif
    let g:hasmaxwin = !g:hasmaxwin
 endfunction
-nnoremap <c-F12> :call ChangeWin()<cr>
+nnoremap <silent> <c-F12> :call ChangeWin()<cr>
 
 " 编码设置
 if g:hasmulti_byte
@@ -123,6 +122,7 @@ set tabstop=4                                           "设置Tab键的宽度
 set shiftwidth=4                                        "换行时自动缩进4个空格
 set smarttab                                            "指定按一次backspace就删除shiftwidth宽度的空格
 set backspace=2                                         "设置退格键可用
+set cursorline                                          "突出当前行
 if g:hassyntax
     syntax on
 endif
