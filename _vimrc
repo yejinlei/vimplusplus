@@ -67,7 +67,7 @@ if g:haswin && g:hasgui
     language messages zh_CN.chinese                     "解决consle输出乱码
 endif
 if g:hasgui
-    set guioptions-=m
+    set guioptions-=m                                   "菜单栏，ctrl+<F11>显示/隐藏
     set guioptions-=T
     set guioptions-=r
     set guioptions-=L
@@ -82,12 +82,29 @@ if g:hasgui
         \set guioptions+=r <Bar>
         \set guioptions+=L <Bar>
     \endif<CR>
-endi
+endif
+
+winpos 150 100                                           "指定窗口出现的位置，坐标原点在屏幕左上角
+set lines=38 columns=120                                "指定窗口大小，lines为高度，columns为宽度
+let g:hasmaxwin=0
+function! ChangeWin()
+   if  g:hasmaxwin == 0
+      set updatetime=1000
+      au CursorHold * simalt ~x
+      set updatetime=4000
+   else
+      au! CursorHold *
+      winpos 150 100                                           "指定窗口出现的位置，坐标原点在屏幕左上角
+      set lines=38 columns=120                                "指定窗口大小，lines为高度，columns为宽
+   endif
+   let g:hasmaxwin = !g:hasmaxwin
+endfunction
+nnoremap <c-F12> :call ChangeWin()<cr>
 
 " 编码设置
 if g:hasmulti_byte
-    set encoding=chinese                                    "设置gvim内部编码
-    set fileencoding=utf-8                                  "设置当前文件编码
+    set encoding=chinese                                "设置gvim内部编码
+    set fileencoding=utf-8                              "设置当前文件编码
     set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1,chinese  "设置支持打开的文件的编码
 endif
 set fileformat=unix                                     "设置新文件的<EOL>格式
