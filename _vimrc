@@ -135,3 +135,6 @@ imap <c-k> <Up>
 imap <c-j> <Down>
 imap <c-h> <Left>
 imap <c-l> <Right>
+nnoremap <c-j><c-j> zt
+nnoremap <c-k><c-k> zb
+nnoremap <c-m><c-m> zz
