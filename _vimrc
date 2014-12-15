@@ -106,7 +106,7 @@ if g:hasmulti_byte
     set fileencoding=utf-8                              "设置当前文件编码
     set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1,chinese  "设置支持打开的文件的编码
 endif
-set fileformat=unix                                     "设置新文件的<EOL>格式
+set fileformat=dos                                      "设置新文件的<EOL>格式
 set fileformats=unix,dos,mac                            "给出文件的<EOL>格式类型
 if has("gui_running")                                   "gui_running图形界面
     set guifont=Courier_New:h10                         "文本字体
@@ -145,6 +145,16 @@ set mouse=a                                             "启用鼠标
 
 " 状态栏
 set laststatus=2                                        "启用状态栏信息
+
+" Vundle插件区
+" $VIM目录下，执行git clone git@github.com:gmarik/Vundle.vim vimfiles/bundle/vundle
+if !g:haswin                                            "vundle加到运行时路径
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+else
+    set rtp+=$VIM/vimfiles/bundle/vundle/
+    call vundle#rc('$VIM/vimfiles/bundle/')
+endif
 
 " 键盘调整
 imap jk <Esc>                                           "插入模式下,jk取代<Esc>键，原键失效
