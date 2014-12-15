@@ -146,16 +146,6 @@ set mouse=a                                             "启用鼠标
 " 状态栏
 set laststatus=2                                        "启用状态栏信息
 
-" Vundle插件区
-" $VIM目录下，执行git clone git@github.com:gmarik/Vundle.vim vimfiles/bundle/vundle
-if !g:haswin                                            "vundle加到运行时路径
-    set rtp+=~/.vim/bundle/vundle/
-    call vundle#rc()
-else
-    set rtp+=$VIM/vimfiles/bundle/vundle/
-    call vundle#rc('$VIM/vimfiles/bundle/')
-endif
-
 " 键盘调整
 imap jk <Esc>                                           "插入模式下,jk取代<Esc>键，原键失效
 imap <c-k> <Up>
@@ -165,3 +155,16 @@ imap <c-l> <Right>
 nnoremap <c-j><c-j> zt
 nnoremap <c-k><c-k> zb
 nnoremap <c-m><c-m> zz
+
+"-----------------------------------------------------------"
+"                       Vundle插件区                        "
+"-----------------------------------------------------------"
+" $VIM目录下，执行git clone git@github.com:gmarik/Vundle.vim vimfiles/bundle/vundle
+if !g:haswin                                            "vundle加到运行时路径
+    set rtp+=~/.vim/bundle/vundle/
+    call vundle#rc()
+else
+    set rtp+=$VIM/vimfiles/bundle/vundle/
+    call vundle#rc('$VIM/vimfiles/bundle/')
+endif
+Bundle 'gmarik/vundle'
