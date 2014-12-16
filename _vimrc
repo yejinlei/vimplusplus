@@ -48,6 +48,7 @@ if has("multi_byte")                                    "支持多字节编码�
 else
     let g:hasmulti_byte=0
 endif
+
 "-----------------------------------------------------------"
 "                       基本配置                            "
 "-----------------------------------------------------------"
@@ -167,4 +168,15 @@ else
     set rtp+=$VIM/vimfiles/bundle/vundle/
     call vundle#rc('$VIM/vimfiles/bundle/')
 endif
+" vundle分为三类：
+" 在Github vim-scripts 用户下的repos,只需要写出repos名称
+" 在Github其他用户下的repos, 需要写出"用户名/repos名"
+" 不在Github上的插件，需要写出git全路径
+
+" 必须,vundle本身
 Bundle 'gmarik/vundle'
+" 状态栏插件
+Bundle 'Lokaltog/vim-powerline'
+set laststatus=2
+set t_Co=256
+let g:Powline_symbols='fancy'
