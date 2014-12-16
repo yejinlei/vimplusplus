@@ -173,6 +173,14 @@ endif
 " 在Github其他用户下的repos, 需要写出"用户名/repos名"
 " 不在Github上的插件，需要写出git全路径
 
+" Bundle命令：
+" :BundleList          #已安装列表
+" :BundleInstall(!)    #安装、升级
+" :BundleSearch(!)     #搜索
+" :BundleClean(!)      #删除
+" 或者
+" :Bundles             #GitHub上插件列表
+
 " 必须,vundle本身
 Bundle 'gmarik/vundle'
 " 状态栏插件
