@@ -100,6 +100,7 @@ function! ChangeWin()
    let g:hasmaxwin = !g:hasmaxwin
 endfunction
 nnoremap <silent> <c-F12> :call ChangeWin()<cr>
+nnoremap <F5> :only<cr>                                 "关闭其他窗口
 
 " 编码设置
 if g:hasmulti_byte
@@ -132,7 +133,7 @@ if g:haswin
     behave mswin
 endif
 
-" 实时搜索及高亮
+" 搜索设置
 set ignorecase                                          "搜索模式里忽略大小写
 set smartcase                                           "智能搜索
 if g:hasextra_search
