@@ -140,6 +140,8 @@ if g:hasextra_search
     set incsearch                                       "实时搜索
     nnoremap hl :set hlsearch!<cr>
 endif
+nnoremap <F3> :lv /<c-r>=expand("<cword>")<cr>/ %<cr> :lw<cr> "当前文件下搜索，光标下单词
+nnoremap <F4> :vim /\<<c-r>=expand("<cword>")<cr>\>/j **/*.txt **/*.c **/*.cpp **/*.h **/*.py<cr> :cw<cr> "当前目录下搜索，光标下单词
 
 " 鼠标设置
 set mouse=a                                             "启用鼠标
