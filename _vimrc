@@ -101,6 +101,10 @@ function! ChangeWin()
 endfunction
 nnoremap <silent> <c-F12> :call ChangeWin()<cr>
 nnoremap <F5> :only<cr>                                 "关闭其他窗口
+nnoremap <c-Down>  :resize +3<CR>                       "调整窗口大小
+nnoremap <c-Up>    :resize -3<CR>
+nnoremap <c-Left>  :vertical resize -3<CR>
+nnoremap <c-Right> :vertical resize +3<CR>
 
 " 编码设置
 if g:hasmulti_byte
