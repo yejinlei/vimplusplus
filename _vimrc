@@ -84,6 +84,8 @@ if g:hasgui
         \set guioptions+=L <Bar>
     \endif<CR>
 endif
+
+" 窗口和标签
 winpos 150 100                                           "指定窗口出现的位置
 set lines=38 columns=120                                 "指定窗口大小
 let g:hasmaxwin=0
@@ -105,6 +107,10 @@ nnoremap <c-Down>  :resize +3<CR>                       "调整窗口大小
 nnoremap <c-Up>    :resize -3<CR>
 nnoremap <c-Left>  :vertical resize -3<CR>
 nnoremap <c-Right> :vertical resize +3<CR>
+nnoremap <M-Down>  :tabnew%<cr>                         "将当前内容在新标签中打开
+nnoremap <M-Up>    :tabedit<cr>                         "打开空白新标签
+nnoremap <M-Left>  :tabclose<cr>                        "关闭当前标签
+nnoremap <M-Right> :tabmove                             "移动标签
 
 " 编码设置
 if g:hasmulti_byte
@@ -114,8 +120,10 @@ if g:hasmulti_byte
 endif
 set fileformat=dos                                      "设置新文件的<EOL>格式
 set fileformats=unix,dos,mac                            "给出文件的<EOL>格式类型
-if has("gui_running")                                   "gui_running图形界面
+if g:hasgui                                             "gui_running图形界面
     set guifont=Courier_New:h10                         "文本字体
+    set cursorline                                      "突出当前行
+    "hi cursorline guibg=#333333                        "反显光标当前行颜色
 endif
 
 " 文本设置
@@ -128,7 +136,6 @@ set tabstop=4                                           "设置Tab键的宽度
 set shiftwidth=4                                        "换行时自动缩进4个空格
 set smarttab                                            "指定按一次backspace就删除shiftwidth宽度的空格
 set backspace=2                                         "设置退格键可用
-set cursorline                                          "突出当前行
 if g:hassyntax
     syntax on
 endif
