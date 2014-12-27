@@ -61,7 +61,17 @@ set nocompatible                                        "禁用 VI 兼容模式
 " 界面设置
 set shortmess=atI                                       "禁止欢迎界面
 set ch=2                                                "命令行高度
-colorscheme evening                                     "配色方案
+colorscheme evening                                     "默认配色方案
+let g:colorschemeno = 0
+function! ChangeColorscheme()                           "配色方案函数
+    let g:colorschemeno = !g:colorschemeno
+    if g:colorschemeno == 1
+       colorscheme zellner
+    else
+       colorscheme evening
+    endif
+endfunction
+nnoremap <silent> <F10> :call ChangeColorscheme()<cr>
 if g:haswin && g:hasgui
     source $VIMRUNTIME\delmenu.vim                      "解决菜单乱码
     source $VIMRUNTIME\menu.vim
@@ -153,7 +163,7 @@ if g:hasextra_search
     nnoremap hl :set hlsearch!<cr>
 endif
 nnoremap <F3> :lv /<c-r>=expand("<cword>")<cr>/ %<cr> :lw<cr> "当前文件下搜索，光标下单词
-nnoremap <F4> :vim /\<<c-r>=expand("<cword>")<cr>\>/j **/*.txt **/*.c **/*.cpp **/*.h **/*.py<cr> :cw<cr> "当前目录下搜索，光标下单词
+nnoremap <F4> :vim /\<<c-r>=expand("<cword>")<cr>\>/j **/*.txt **/*.c **/*.cpp **/*.h **/*.py **/*.vim<cr> :cw<cr> "当前目录下搜索，光标下单词
 
 " 鼠标设置
 set mouse=a                                             "启用鼠标
