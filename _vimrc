@@ -1,6 +1,7 @@
-"-----------------------------------------------------------"
-"                       侦测特性                            "
-"-----------------------------------------------------------"
+".vim配置文件设计.
+".------.
+
+".## 侦测特性.
 if has("autocmd")
     let g:hasautocmd=1                                   "支持自动命令
 else
@@ -49,16 +50,15 @@ else
     let g:hasmulti_byte=0
 endif
 
-"-----------------------------------------------------------"
-"                       基本配置                            "
-"-----------------------------------------------------------"
-" 配置文件
+
+".## 基本配置.
+".### 配置文件.
 let mapleader = "-"                                     "map前缀,用于替换后续<Leader>
 nnoremap <silent> <Leader>ev :vsplit $MYVIMRC<cr>       "快速编辑配置文件
 nnoremap <silent> <Leader>sv :source $MYVIMRC<cr>       "快速生效配置文件
 set nocompatible                                        "禁用 VI 兼容模式
 
-" 界面设置
+".### 界面设置.
 set shortmess=atI                                       "禁止欢迎界面
 set ch=2                                                "命令行高度
 colorscheme evening                                     "默认配色方案
@@ -95,7 +95,7 @@ if g:hasgui
     \endif<CR>
 endif
 
-" 窗口和标签
+".### 窗口和标签.
 winpos 150 100                                           "指定窗口出现的位置
 set lines=38 columns=120                                 "指定窗口大小
 let g:hasmaxwin=0
@@ -122,7 +122,7 @@ nnoremap <M-Up>    :tabedit<cr>                         "打开空白新标签
 nnoremap <M-Left>  :tabclose<cr>                        "关闭当前标签
 nnoremap <M-Right> :tabmove                             "移动标签
 
-" 编码设置
+".### 编码设置.
 if g:hasmulti_byte
     set encoding=chinese                                "设置gvim内部编码
     set fileencoding=utf-8                              "设置当前文件编码
@@ -136,7 +136,7 @@ if g:hasgui                                             "gui_running图形界面
     "hi cursorline guibg=#333333                        "反显光标当前行颜色
 endif
 
-" 文本设置
+".### 文本设置.
 filetype off                                            "禁用文件类型侦测
 set autoread                                            "当文件在外部被修改，自动更新该文件
 set number                                              "显示行号
@@ -154,7 +154,7 @@ if g:haswin
     behave mswin
 endif
 
-" 搜索设置
+".### 搜索设置.
 set ignorecase                                          "搜索模式里忽略大小写
 set smartcase                                           "智能搜索
 if g:hasextra_search
@@ -165,13 +165,13 @@ endif
 nnoremap <F3> :lv /<c-r>=expand("<cword>")<cr>/ %<cr> :lw<cr> "当前文件下搜索，光标下单词
 nnoremap <F4> :vim /\<<c-r>=expand("<cword>")<cr>\>/j **/*.txt **/*.c **/*.cpp **/*.h **/*.py **/*.vim<cr> :cw<cr> "当前目录下搜索，光标下单词
 
-" 鼠标设置
+".### 鼠标设置.
 set mouse=a                                             "启用鼠标
 
-" 状态栏
+".### 状态栏.
 set laststatus=2                                        "启用状态栏信息
 
-" 键盘调整
+".### 键盘调整.
 imap jk <Esc>                                           "插入模式下,jk取代<Esc>键，原键失效
 imap <c-k> <Up>
 imap <c-j> <Down>
@@ -181,10 +181,9 @@ nnoremap <c-j><c-j> zt
 nnoremap <c-k><c-k> zb
 nnoremap <c-m><c-m> zz
 
-"-----------------------------------------------------------"
-"                       Vundle插件区                        "
-"-----------------------------------------------------------"
-" $VIM目录下，执行git clone git@github.com:gmarik/Vundle.vim vimfiles/bundle/vundle
+
+".## Vundle插件区.
+".### $VIM目录下，执行git clone git@github.com:gmarik/Vundle.vim vimfiles/bundle/vundle.
 if !g:haswin                                            "vundle加到运行时路径
     set rtp+=~/.vim/bundle/vundle/
     call vundle#rc()
@@ -207,8 +206,14 @@ endif
 
 " 必须,vundle本身
 Bundle 'gmarik/vundle'
-" 状态栏插件
+".### 状态栏插件.
 Bundle 'Lokaltog/vim-powerline'
 set laststatus=2
 set t_Co=256
 let g:Powline_symbols='fancy'
+
+".### 自定义工具.
+if has('python')
+    source $VIM/tools/autoreadme.vim
+    command! -nargs=0 AutoReadme :call AutoReadme()
+endif
