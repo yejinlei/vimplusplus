@@ -3,48 +3,48 @@
 
 ".## 侦测特性.
 if has("autocmd")
-    let g:hasautocmd=1                                   ".> * 支持自动命令?.
+        let g:hasautocmd=1                                   ".> * 是否支持自动命令.
 else
     let g:hasautocmd=0
 endif
 
 if has("win32") || has("win64")
-    let g:haswin=1                                      ".> * windows操作系统?.
+    let g:haswin=1                                      ".> * 是否windows操作系统.
 else
     let g:haswin=0
 endif
 
 if has("gui_running")
-    let g:hasgui=1                                      ".> * 支持gui界面?.
+    let g:hasgui=1                                      ".> * 是否支持gui界面.
 else
     let g:hasgui=0
 endif
 
 if g:hasgui && g:haswin
-    let g:hasbro=1                                      ".> * 支持对话框打开文件?.
+    let g:hasbro=1                                      ".> * 是否支持对话框打开文件.
 else
     let g:hasbro=0
 endif
 
 if has("cmdline_compl")
-    let g:hascmdline_compl=1                            ".> * 支持命令行补全?.
+    let g:hascmdline_compl=1                            ".> * 是否支持命令行补全.
 else
     let g:hascmdline_compl=0
 endif
 
 if has("extra_search")
-    let g:hasextra_search=1                             ".> * 支持搜索扩展特性?.
+    let g:hasextra_search=1                             ".> * 是否支持搜索扩展特性.
 else
     let g:hasextra_search=0
 endif
 
 if has("syntax")
-    let g:hassyntax=1                                   ".> * 支持语法高亮?.
+    let g:hassyntax=1                                   ".> * 是否支持语法高亮.
 else
     let g:hassyntax=0
 endif
 
-if has("multi_byte")                                    ".> * 支持多字节编码，比如中文?.
+if has("multi_byte")                                    ".> * 是否支持多字节编码，比如中文.
     let g:hasmulti_byte=1
 else
     let g:hasmulti_byte=0
