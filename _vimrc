@@ -1,11 +1,12 @@
 ".vim配置文件设计.
 ".------.
 
+
 ".## 侦测特性.
 if has("autocmd")
         let g:hasautocmd=1                                   ".> * 是否支持自动命令.
 else
-    let g:hasautocmd=0
+        let g:hasautocmd=0
 endif
 
 if has("win32") || has("win64")
@@ -51,6 +52,7 @@ else
 endif
 
 
+".------.
 ".## 基本配置.
 ".### 配置文件.
 let mapleader = "-"                                     "map前缀,用于替换后续<Leader>
@@ -182,6 +184,7 @@ nnoremap <c-k><c-k> zb
 nnoremap <c-m><c-m> zz
 
 
+".------.
 ".## Vundle插件区.
 ".### $VIM目录下，执行git clone git@github.com:gmarik/Vundle.vim vimfiles/bundle/vundle.
 if !g:haswin                                            "vundle加到运行时路径
