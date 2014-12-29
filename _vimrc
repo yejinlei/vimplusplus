@@ -215,5 +215,5 @@ let g:Powline_symbols='fancy'
 ".### 自定义工具.
 if has('python')
     source $VIM/tools/autoreadme.vim
-    command! -nargs=0 AutoReadme :call AutoReadme()
+    command! -complete=function -nargs=0 AutoReadme :call AutoReadme()
 endif
