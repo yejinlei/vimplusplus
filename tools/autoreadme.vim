@@ -3,7 +3,7 @@ python << EOF
 # coding=gbk
 import vim, codecs, re, StringIO
 try:
-    p = re.compile(r'\.(.*)\.$')
+    p = re.compile(r'\"\.(.*)\.$')
     s = open(r'../_vimrc', 'r')
     d = open(r'../README.md', 'w+')
     d.truncate(0)
