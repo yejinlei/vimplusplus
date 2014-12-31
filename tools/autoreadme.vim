@@ -1,11 +1,14 @@
 function! AutoReadme()
 python << EOF
 # coding=gbk
-import vim, codecs, re, StringIO
+import os, vim, codecs, re, StringIO
 try:
+    vimpath = vim.eval('$VIM')
+    vimrcpath = os.path.join(vimpath, '_vimrc')
+    readmepath = os.path.join(vimpath, 'README.md')
     p = re.compile(r'\"\.(.*)\.$')
-    s = open(r'../_vimrc', 'r')
-    d = open(r'../README.md', 'w+')
+    s = open(vimrcpath, 'r')
+    d = open(readmepath, 'r+')
     d.truncate(0)
     d.seek(0)
     lines = s.readlines()
@@ -15,7 +18,7 @@ try:
             d.write(m.group(1) + '\n')
     s.close()
     d.close()
-except:
-    print 'AutoReadme Error!'
+except Exception, e:
+    print Exception, e
 EOF
 endfunction
