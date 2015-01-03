@@ -59,6 +59,12 @@ else
     let g:hasmulti_byte=0
 endif
 
+".> * 是否支持python接口.
+if has('python')
+    let g:haspython=1
+else
+    let g:haspython=0
+endif
 
 "..
 ".## 基本配置.
@@ -279,8 +285,13 @@ let g:Powline_symbols='fancy'
 
 "..
 ".### 自定义工具.
-if has('python')
-    ".> * 自动生成README.md 
+if g:haspython
+    ".> * 自动生成README.md.
     source $VIM/tools/autoreadme.vim
     command! -complete=function -nargs=0 AutoReadme :call AutoReadme()
+    ".> * 集成everything命令行工具es.
+    if g:haswin
+        source $VIM/tools/es.vim
+        command! -nargs=+ -complete=file ES call ES(<f-args>)
+    endif
 endif
