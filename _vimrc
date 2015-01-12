@@ -66,11 +66,17 @@ else
     let g:haspython=0
 endif
 
+".> * 是否支持自动切换目录.
+if has('autochdir')
+    let g:hasautochdir=1
+else
+    let g:hasautochdir=0
+endif
 "..
 ".## 基本配置.
 ".### 配置文件.
 ".> * map前缀,用于替换后续<Leader>.
-let mapleader = "-"
+let mapleader = ","
 
 ".> * 快速编辑配置文件.
 nnoremap <silent> <Leader>ev :vsplit $MYVIMRC<cr>
@@ -97,7 +103,7 @@ function! ChangeColorscheme()
     endif
 endfunction
 ".> * 改变配色方案.
-nnoremap <silent> <F10> :call ChangeColorscheme()<cr>
+nnoremap <silent> <c-F10> :call ChangeColorscheme()<cr>
 if g:haswin && g:hasgui
     ".> * 解决菜单乱码.
     source $VIMRUNTIME\delmenu.vim
@@ -180,9 +186,16 @@ if g:hasgui
 endif
 
 "..
+".### 目录设置.
+".> * 自动切换目录.
+if g:hasautocmd
+    set autochdir
+endif
+
+"..
 ".### 文本设置.
-".> * 禁用文件类型侦测.
-filetype off
+".> * 文件类型侦测.
+filetype on
 ".> * 当文件在外部被修改，自动更新该文件.
 set autoread
 ".> * 显示行号.
@@ -293,5 +306,12 @@ if g:haspython
     if g:haswin
         source $VIM/tools/es.vim
         command! -nargs=+ -complete=file ES call ES(<f-args>)
+        ".> * 目录记录工具.
+        source $VIM/tools/dirmark.vim
+        command! -nargs=0 -complete=dir Ml call MarkList()
+        command! -nargs=0 -complete=dir Cu echo DirCur()
+        command! -nargs=0 -complete=dir Go call DirGoto()
+        command! -nargs=* -complete=dir Ms call MarkSave(<f-args>)
+        command! -nargs=0 -complete=dir Md call MarkDel()
     endif
 endif
