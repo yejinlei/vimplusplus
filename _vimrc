@@ -238,6 +238,12 @@ endif
 nnoremap <F3> :lv /<c-r>=expand("<cword>")<cr>/ %<cr> :lw<cr>
 ".> * 当前目录下搜索，光标下单词.
 nnoremap <F4> :vim /\<<c-r>=expand("<cword>")<cr>\>/j **/*.txt **/*.c **/*.cpp **/*.h **/*.py **/*.vim<cr> :cw<cr> 
+if g:haspython && g:haswin
+    ".> * 搜索对话框,输入目标单词.
+    source $VIM/tools/search.vim
+    nnoremap <silent> <c-F3> :call FileSearch()<cr>
+    nnoremap <silent> <c-F4> :call ProSearch()<cr>
+endif
 
 "..
 ".### 鼠标设置.
