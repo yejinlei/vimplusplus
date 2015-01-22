@@ -4,8 +4,9 @@ python << EOF1
 import os, vim, codecs
 try:
     string = vim.eval('inputdialog("Search in File")')
-    vim.command(r'lv /' + string + r'/ %')
-    vim.command('lw')
+    if string != '':
+        vim.command(r'lv /' + string + r'/ %')
+        vim.command('lw')
 except Exception, e:
     print Exception, e
 EOF1
@@ -17,8 +18,9 @@ python << EOF2
 import os, vim, codecs
 try:
     string = vim.eval('inputdialog("Search in Pro")')
-    vim.command(r'vim /'+ string + r'/j **/*.txt **/*.c **/*.cpp **/*.h **/*.py **/*.vim')
-    vim.command('cw')
+    if string != '':
+        vim.command(r'vim /'+ string + r'/j **/*.txt **/*.c **/*.cpp **/*.h **/*.py **/*.vim')
+        vim.command('cw')
 except Exception, e:
     print Exception, e
 EOF2
